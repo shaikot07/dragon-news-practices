@@ -14,7 +14,6 @@ const Login = () => {
             const email = form.get('email');
             const password = form.get('password')
             console.log(email, password);
-
             signIn(email,password)
                   .then(res =>{
                         toast.success("Log in Success")
