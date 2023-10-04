@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import Navbar from '../../Shared/Navbar';
 import { AuthContext } from '../../provider/AuthProvider';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
+      const navigate = useNavigate()
       const {createUser } = useContext(AuthContext)
       const handleRegister = e => {
             e.preventDefault();
@@ -16,6 +17,7 @@ const Register = () => {
             createUser(email,password)
                   .then(res =>{
                         toast.success(' User create Successfully !')
+                        navigate("/")
                   })
                   .catch(error =>{
                         toast.error("Already have account")
@@ -27,7 +29,7 @@ const Register = () => {
                   <Navbar></Navbar>
                   <div className="hero min-h-screen bg-base-200">
                         <div className="hero-content flex-col ">
-                              <h1 className="text-5xl font-bold">Login now!</h1>
+                              <h1 className="text-5xl font-bold">Register now!</h1>
                               <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                                     <form onSubmit={handleRegister}>
                                           <div className="card-body">
@@ -54,7 +56,7 @@ const Register = () => {
                                                 </div>
                                                 <p>Already have Account? <Link to="/login" className='text-blue-600  underline'>Login</Link> </p>
                                                 <div className="form-control mt-6">
-                                                      <button type='submit' className="btn btn-primary">Login</button>
+                                                      <button type='submit' className="btn btn-primary">Register</button>
                                                 </div>
                                           </div>
                                     </form>

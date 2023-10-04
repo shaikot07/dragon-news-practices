@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import Navbar from '../../Shared/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import toast from 'react-hot-toast';
 
 const Login = () => {
       const {signIn} = useContext(AuthContext)
+      const location = useLocation()
+      const navigate = useNavigate()
       const handleLogIn = e => {
             e.preventDefault();
             const form = new FormData(e.currentTarget);
@@ -16,6 +18,8 @@ const Login = () => {
             signIn(email,password)
                   .then(res =>{
                         toast.success("Log in Success")
+                        // navaget after log in 
+                        navigate(location?.state ? location.state : '/')
                   })
                   .catch(error =>{
                         toast.error("Invalid email or password")
@@ -45,7 +49,7 @@ const Login = () => {
                                                             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                                       </label>
                                                 </div>
-                                                <p>Do not have an Account? <Link to="/login" className='text-blue-600 underline'>Login</Link> </p>
+                                                <p>Do not have an Account? please <Link to="/login" className='text-blue-600 underline'>Register</Link> </p>
                                                 <div className="form-control mt-6">
                                                       <button type='submit' className="btn btn-primary">Login</button>
                                                 </div>
